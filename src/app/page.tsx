@@ -3,93 +3,91 @@ import styles from './page.module.sass'
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    <main className="w-full h-screen p-6">
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+      <h2>Crypto List</h2>
+      <section className="relative overflow-x-auto w-full">
+        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-white uppercase  dark:text-gray-700">
+            <tr>
+              <th scope="col" className="px-6 py-3 bg-gray-100/10 dark:bg-gray-700/10 rounded-l-lg">Id</th>
+              <th scope="col" className="px-6 py-3 bg-gray-100/10 dark:bg-gray-700/10">Name</th>
+              <th scope="col" className="px-6 py-3 bg-gray-100/10 dark:bg-gray-700/10">Symbol</th>
+              <th scope="col" className="px-6 py-3 bg-gray-100/10 dark:bg-gray-700/10 rounded-r-lg">Price</th>
+            </tr>
+          </thead>
+          <tbody>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>
+                <button>Load More</button>
+              </td>
+              <td>
+                Footer
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" className="px-6 py-3 rounded-l-lg">
+                Product name
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Qty
+              </th>
+              <th scope="col" className="px-6 py-3 rounded-r-lg">
+                Price
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="bg-white dark:bg-gray-800">
+              <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                Apple MacBook Pro 17&quot;
+              </th>
+              <td className="px-6 py-4">
+                1
+              </td>
+              <td className="px-6 py-4">
+                $2999
+              </td>
+            </tr>
+            <tr className="bg-white dark:bg-gray-800">
+              <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                Microsoft Surface Pro
+              </th>
+              <td className="px-6 py-4">
+                1
+              </td>
+              <td className="px-6 py-4">
+                $1999
+              </td>
+            </tr>
+            <tr className="bg-white dark:bg-gray-800">
+              <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                Magic Mouse 2
+              </th>
+              <td className="px-6 py-4">
+                1
+              </td>
+              <td className="px-6 py-4">
+                $99
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr className="font-semibold text-gray-900 dark:text-white">
+              <th scope="row" className="px-6 py-3 text-base">Total</th>
+              <td className="px-6 py-3">3</td>
+              <td className="px-6 py-3">21,000</td>
+            </tr>
+          </tfoot>
+        </table>
+      </section>
     </main>
   )
 }
