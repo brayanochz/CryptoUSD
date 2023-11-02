@@ -1,22 +1,18 @@
-"use client";
-
-import React, { useState } from 'react';
+import React, { FC } from 'react';
 import OptionBar from '../../molecules/OptionBar';
+
+interface CoinListProps {
+  page: string
+}
 import DataTable from '../../organisms/DataTable';
-import { CryptocurrencyClient } from '@/services/CryptocurrencyClient'
-import { ApiContext } from '@/context/ApiContext'
 
-const CoinList = () => {
-
-  const [apiCryptocurrency] = useState(new CryptocurrencyClient());
+const CoinList: FC<CoinListProps> = async ({ page }) => {
 
   return (
-    <ApiContext.Provider value={{ apiCryptocurrency }}>
-      <div>
-        <OptionBar />
-        <DataTable />
-      </div>
-    </ApiContext.Provider>
+    <div>
+      <OptionBar />
+      <DataTable page={page} />
+    </div>
   );
 };
 

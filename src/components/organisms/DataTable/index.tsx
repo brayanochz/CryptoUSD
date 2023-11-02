@@ -1,10 +1,6 @@
-"use client";
-
-import React, { useEffect, useContext, useState } from 'react';
+import React, { FC } from 'react';
 import Table from '../../molecules/Table';
-import { ApiContext } from '@/context/ApiContext';
 import { CryptocurrencyClient } from '@/services/CryptocurrencyClient';
-import { Coin } from '@/interfaces/coins';
 
 const columns = {
   Name: 'name',
@@ -13,26 +9,19 @@ const columns = {
   Rank: 'rank'
 }
 
-const DataTable = () => {
+interface DataTableProps {
+  page: string
+}
 
-  const [coins, setCoins] = useState<Coin[]>([])
-  const context = useContext(ApiContext);
+const DataTable: FC<DataTableProps> = async ({ page }) => {
 
-  const getAllCoins = async (client: CryptocurrencyClient) => {
-    const coins = await client.getCoins()
-    console.log(coins)
-    setCoins(coins?.data)
-  }
+  const cryptocurrencyClient = new CryptocurrencyClient()
 
-  useEffect(() => {
-    const { apiCryptocurrency } = context
-    if (!apiCryptocurrency) return
-    getAllCoins(apiCryptocurrency)
-  }, [context])
+  const coins = await cryptocurrencyClient.getCoins(page)
 
   return (
-    <section className="relative overflow-x-auto w-full">
-      <Table data={coins} headers={columns} />
+    <section className="relative max-h-70vh overflow-x-auto w-full">
+      <Table data={coins.data} headers={columns} />
     </section>
   );
 };

@@ -4,11 +4,9 @@ import TableHeader from '@/components/atoms/TableHeader';
 import { ITableData } from '@/interfaces/table';
 import React, { FC } from 'react';
 
-
 const Table: FC<ITableData> = ({ data, headers }) => {
-
   return (
-    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <table className="max-h-20 relative overflow-hidden w-full text-sm text-left text-gray-500 dark:text-gray-400">
       <TableHeader headers={headers} />
       <TableContent data={data} headers={headers} />
       <TableFooter />

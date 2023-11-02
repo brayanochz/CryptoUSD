@@ -1,12 +1,9 @@
-export async function GET(request: Request) {
-  console.log(process.env.CRYPTOCURRENCY_API)
-  const apiUrl = `${process.env.CRYPTOCURRENCY_API}${process.env.CRYPTOCURRENCY_COIN_ENDPOINT}`
-  const res = await fetch(apiUrl || '', {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-  const data = await res.json()
+import { CryptocurrencyClient } from "@/services/CryptocurrencyClient"
+
+export async function GET() {
+  const cryptocurrencyClient = new CryptocurrencyClient()
+ 
+  const data = await cryptocurrencyClient.getCoins('1')
  
   return Response.json(data)
 }

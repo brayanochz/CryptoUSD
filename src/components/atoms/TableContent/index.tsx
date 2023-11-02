@@ -7,8 +7,7 @@ const TableContent: FC<ITableData> = ({ data, headers }) => {
   const dataKeys = Object.values(headers || {})
 
   return (
-    <tbody>
-
+    <tbody className='max-h-10 overflow-y-scroll'>
       {
         data.map((coin: Coin) => (
           <tr key={coin.id} className="bg-white dark:bg-gray-800">

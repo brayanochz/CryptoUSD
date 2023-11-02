@@ -1,10 +1,9 @@
-"use client";
 import { IApiClient } from '@/interfaces/apiClient';
 import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 
 const axiosClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_CRYPTOCURRENCY_API,
-  timeout: parseInt(process.env.NEXT_PUBLIC_TIMEOUT || '1000'),
+  baseURL: process.env.CRYPTOCURRENCY_API,
+  timeout: parseInt(process.env.TIMEOUT || '1000'),
   headers: {}
 });
 
