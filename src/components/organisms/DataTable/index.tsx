@@ -3,10 +3,19 @@ import Table from '../../molecules/Table';
 import { CryptocurrencyClient } from '@/services/CryptocurrencyClient';
 
 const columns = {
-  Name: 'name',
-  Symbol: 'symbol',
-  Price: 'price_usd',
-  Rank: 'rank'
+  Name: {
+    key: 'name',
+  },
+  Symbol: {
+    key: 'symbol',
+  },
+  Price: {
+    key: 'price_usd',
+    format: true
+  },
+  Rank: {
+    key: 'rank'
+  }
 }
 
 interface DataTableProps {

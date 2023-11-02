@@ -1,7 +1,12 @@
 import { Coin } from "./coins"
 
 export interface ITableHeader {
-  [key: string]: string
+  [key: string]: ITableHeaderColumn
+}
+
+export interface ITableHeaderColumn {
+    key: string,
+    format?: boolean
 }
 
 export interface ITableData {
