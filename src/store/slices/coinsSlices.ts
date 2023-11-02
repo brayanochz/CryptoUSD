@@ -1,4 +1,4 @@
-import { Coin } from "@/types/coins";
+import { Coin } from "@/interfaces/coins";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
