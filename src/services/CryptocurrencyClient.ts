@@ -19,6 +19,7 @@ export class CryptocurrencyClient {
     }
     const params = new URLSearchParams(interval)
     const url = `${process.env.CRYPTOCURRENCY_COIN_ENDPOINT}?${params}`
+    console.log(url)
     if (!url) throw new Error("Not COIN ENDPOINT");
     return this.apiClient.get<CoinsResponse>(url)
   }

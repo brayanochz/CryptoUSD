@@ -1,17 +1,19 @@
 import React, { FC } from 'react';
 import OptionBar from '../../molecules/OptionBar';
+import DataTable from '../../organisms/DataTable';
+import { FilterType } from '@/types';
 
 interface CoinListProps {
-  page: string
+  page: string,
+  filter: FilterType
 }
-import DataTable from '../../organisms/DataTable';
 
-const CoinList: FC<CoinListProps> = async ({ page }) => {
+const CoinList: FC<CoinListProps> = async ({ page, filter }) => {
 
   return (
     <div>
-      <OptionBar />
-      <DataTable page={page} />
+      <OptionBar filter={filter} />
+      <DataTable page={page} filter={filter} />
     </div>
   );
 };
