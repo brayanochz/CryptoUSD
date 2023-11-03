@@ -1,10 +1,15 @@
+import Button from '@/components/atoms/Button';
+import Input from '@/components/atoms/Input';
 import React from 'react';
 
 const OptionBar = () => {
   return (
-    <div>
-      Option bar molecule
-    </div>
+    <section>
+      <form action={'/'} method='GET'>
+        <Input type='text' placeholder='Coin name' name='coin' />
+        <Button type='submit'>Filter</Button>
+      </form>
+    </section>
   );
 };
 
