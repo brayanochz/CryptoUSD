@@ -10,9 +10,6 @@ export default async function Home({
   params: { page },
   searchParams
 }: HomeProps) {
-
-  console.log(searchParams)
-
   return (
     <main className="w-full h-screen p-6">
 
