@@ -1,5 +1,5 @@
 import { IApiClient } from "@/interfaces/apiClient";
-import { ApiClient } from "./clients/ApiClient";
+import { ApiClient } from "./ApiClient";
 import { CoinsResponse } from "@/interfaces/table";
 
 export const revalidate = 3600
