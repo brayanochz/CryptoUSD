@@ -8,10 +8,10 @@ const TableContent: FC<ITableData> = ({ data, headers }) => {
   const priceFormatter = PriceFormatter()
 
   return (
-    <tbody className='max-h-10 overflow-y-scroll'>
+    <tbody className='max-h-10 overflow-y-scroll text-white'>
       {
         data.map((coin: Coin) => (
-          <tr key={coin.id} className="bg-white dark:bg-gray-800">
+          <tr key={coin.id} className="dark:bg-gray-800">
             {Object.values(headers).map((header: ITableHeaderColumn) => (
               <td key={`coin-${header.key}`} className="px-6 py-4">
                 {

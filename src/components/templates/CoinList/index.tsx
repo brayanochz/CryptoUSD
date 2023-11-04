@@ -18,7 +18,7 @@ const CoinList: FC<CoinListProps> = async ({ page, filter }) => {
 
   const arrayFilter = Object.keys(filter)
 
-  const filteredData = arrayFilter.reduce<Coin[]>(
+  const filteredData = arrayFilter.length > 0 ? arrayFilter.reduce<Coin[]>(
     (previous, current) => {
       if (previous?.length <= 0) {
         return coins.data.filter((coin: Coin) => {
@@ -30,7 +30,7 @@ const CoinList: FC<CoinListProps> = async ({ page, filter }) => {
       })
     },
     []
-  )
+  ) : coins.data
 
   return (
     <div>

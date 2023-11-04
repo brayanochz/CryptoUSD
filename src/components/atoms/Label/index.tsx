@@ -1,12 +1,8 @@
 import React, { FC } from 'react';
 
-interface LabelProps {
-  children?: React.ReactNode
-}
-
-const Label: FC<LabelProps> = ({ children }) => {
+const Label: FC<React.AllHTMLAttributes<HTMLLabelElement>> = ({ children, ...props }) => {
   return (
-    <label className='text-xs'>
+    <label {...props} className='text-xs'>
       {children}
     </label>
   );

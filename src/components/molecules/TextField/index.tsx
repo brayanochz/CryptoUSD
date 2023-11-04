@@ -9,7 +9,7 @@ interface TextFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
 const TextField: FC<TextFieldProps> = ({ label, ...props }) => {
   return (
     <div className='flex flex-col justify-start px-2'>
-      {label ? <Label >{label}</Label> : <></>}
+      {label ? <Label htmlFor={props.id || props.name}>{label}</Label> : <></>}
       <Input {...props} />
     </div>
   );
