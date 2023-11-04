@@ -1,17 +1,20 @@
 import CoinList from "@/components/templates/CoinList";
+import { useRouter } from "next/navigation";
 
 interface HomeProps {
-  params: { page: string }
+  params: { page: string },
+  searchParams: { [key: string]: string | string[] | undefined },
 }
 
 export default async function Home({
-  params: { page }
+  params: { page },
+  searchParams
 }: HomeProps) {
   return (
     <main className="w-full h-screen p-6">
 
       <h2>Crypto List page {page} </h2>
-      <CoinList page={page} />
+      <CoinList page={page} filter={searchParams} />
     </main>
   )
 }

@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import Table from '../../molecules/Table';
 import { CryptocurrencyClient } from '@/services/CryptocurrencyClient';
+import { FilterType } from '@/types';
+import { Coin } from '@/interfaces/coins';
 
 const columns = {
   Name: {
@@ -19,18 +21,16 @@ const columns = {
 }
 
 interface DataTableProps {
-  page: string
+  data: Coin[]
 }
 
-const DataTable: FC<DataTableProps> = async ({ page }) => {
+const DataTable: FC<DataTableProps> = async ({ data }) => {
 
-  const cryptocurrencyClient = new CryptocurrencyClient()
 
-  const coins = await cryptocurrencyClient.getCoins(page)
 
   return (
     <section className="relative max-h-70vh overflow-x-auto w-full">
-      <Table data={coins.data} headers={columns} />
+      <Table data={data} headers={columns} />
     </section>
   );
 };
