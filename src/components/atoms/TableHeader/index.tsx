@@ -1,6 +1,7 @@
 import { ITableHeader } from '@/interfaces/table';
 import React, { FC } from 'react';
 import clsx from 'clsx';
+import { v4 as uuidv4 } from 'uuid'
 
 interface TableHeaderProps {
   headers: ITableHeader
@@ -15,7 +16,7 @@ const TableHeader: FC<TableHeaderProps> = ({ headers }) => {
       <tr>
         {columnNames.map((columnName, index) => (
           <th
-            key={`column-${headers[columnName]}`}
+            key={uuidv4()}
             scope="col"
             className={
               clsx(
