@@ -8,7 +8,8 @@ export class CryptocurrencyClient {
   private apiClient: IApiClient;
 
   constructor() {
-    this.apiClient = new ApiClient()
+    if (!process.env.CRYPTOCURRENCY_API) throw new Error("Invalid CRYPTOCURRENCY_API");
+    this.apiClient = new ApiClient(process.env.CRYPTOCURRENCY_API)
   }
 
   async getCoins(pageRAW: string): Promise<CoinsResponse> {
