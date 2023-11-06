@@ -15,4 +15,5 @@ export interface Coin {
   csupply: string
   tsupply: string
   msupply: string
+  price?: string
 }
