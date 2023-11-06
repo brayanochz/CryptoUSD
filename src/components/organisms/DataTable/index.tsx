@@ -12,7 +12,7 @@ const columns = {
     key: 'symbol',
   },
   Price: {
-    key: 'price_usd',
+    key: 'price',
     format: true
   },
   Rank: {
@@ -25,9 +25,6 @@ interface DataTableProps {
 }
 
 const DataTable: FC<DataTableProps> = async ({ data }) => {
-
-
-
   return (
     <section className="relative max-h-70vh overflow-x-auto w-full">
       <Table data={data} headers={columns} />
