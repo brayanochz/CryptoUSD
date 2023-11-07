@@ -1,8 +1,7 @@
 const nextJest = require("next/jest")
 const dotenv = require("dotenv")
-/*import dotenv from 'dotenv';*/
 
-dotenv.config({ path: '.env.local' });
+dotenv.config({ path: '.env.test' });
 
 const createJestConfig = nextJest({
   dir: "./"

@@ -54,3 +54,12 @@ export const cryptoMock = [
     "msupply": "21000000"
   }
 ];
+
+
+export const cryptoCurrency = {
+  "data": cryptoMock,
+  "info": {
+    "coins_num": 1969,
+    "time": 1538560355
+  }
+}

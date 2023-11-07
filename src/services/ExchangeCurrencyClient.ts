@@ -7,9 +7,10 @@ export class ExchangeCurrencyClient {
 
   private apiClient: IApiClient;
 
-  constructor() {
-    if (!process.env.EXCHANGE_API) throw new Error("Invalid EXCHANGE_API");
-    this.apiClient = new ApiClient(process.env.EXCHANGE_API)
+  constructor(apiUrl?: string) {
+    const url =  apiUrl || process.env.EXCHANGE_API
+    if (!url) throw new Error("Invalid EXCHANGE_API");
+    this.apiClient = new ApiClient(url)
   }
 
   async getCurrencies(): Promise<ExchangeRates> {
