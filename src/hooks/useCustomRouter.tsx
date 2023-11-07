@@ -12,21 +12,14 @@ export function useCustomRouter() {
   const searchParams = useSearchParams();
 
   const push = (href: string, routerOptions?: CustomRouterOptions, options?: NavigateOptions) => {
-    const url = new URL(href.includes("http") ? href : window.location.host + href);
 
-    if (routerOptions?.preserveQuery) {
-      // Preserve current query parameters if necessary
-      searchParams.forEach((val, key) => {
-        url.searchParams.append(key, val);
-      });
-    }
+    const actualSearchParams = searchParams.toString()
 
-    let urlString = url.toString();
+    let urlString = href
 
-    if (!href.includes("http")) {
-      // Adjust the URL to a relative path if it's not a full URL
-      urlString = urlString.substring(urlString.indexOf("/"));
-    }
+    // Append search params
+    if (routerOptions?.preserveQuery)
+      urlString = `${urlString}?${actualSearchParams}`
 
     // Perform navigation using Next.js router
     router.push(urlString, options);
