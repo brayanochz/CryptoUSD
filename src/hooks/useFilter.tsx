@@ -3,7 +3,9 @@ import { FilterType } from "@/types";
 
 const useFilter = () => {
 
-  const filterData = (data: Coin[], filter: FilterType) => {
+  const filterData = (data?: Coin[], filter?: FilterType) => {
+    if (!data) return []
+    if (!filter) return data
     const arrayFilter = Object.keys(filter).filter((filterName) => {
       return filterName !== 'currency'
     })
