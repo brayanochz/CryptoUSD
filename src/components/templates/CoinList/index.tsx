@@ -4,6 +4,12 @@ import DataTable from '../../organisms/DataTable';
 import { FilterType } from '@/types';
 import { CryptocurrencyClient } from '@/services/CryptocurrencyClient';
 import { Coin } from '@/interfaces/coins';
+import { ExchangeCurrencyClient } from '@/services/ExchangeCurrencyClient';
+import { ExchangeRates } from '@/interfaces/exchangeRates';
+import { currencyMock } from '@/mock/currency';
+import useCryptoCurrency from '@/hooks/useCryptoCurrency';
+import useCurrencyExchange from '@/hooks/useCurrencyExchange';
+import useFilter from '@/hooks/useFilter';
 
 interface CoinListProps {
   page: string,
@@ -12,30 +18,26 @@ interface CoinListProps {
 
 const CoinList: FC<CoinListProps> = async ({ page, filter }) => {
 
-  const cryptocurrencyClient = new CryptocurrencyClient()
+  const { getCoins } = useCryptoCurrency()
+  const { getCurrencyData, convertCurrency, getCurrencyOptions } = useCurrencyExchange()
+  const { filterData } = useFilter()
 
-  const coins = await cryptocurrencyClient.getCoins(page)
+  const coins = await getCoins(page)
 
-  const arrayFilter = Object.keys(filter)
+  const baseCurrency = (filter['currency']) as string
 
-  const filteredData = arrayFilter.length > 0 ? arrayFilter.reduce<Coin[]>(
-    (previous, current) => {
-      if (previous?.length <= 0) {
-        return coins.data.filter((coin: Coin) => {
-          return coin[current as keyof Coin].toString().toLowerCase().includes((filter[current] as string)?.toString().toLowerCase())
-        })
-      }
-      return previous.filter((coin: Coin) => {
-        return coin[current as keyof Coin].toString().toLowerCase().includes((filter[current] as string)?.toString().toLowerCase())
-      })
-    },
-    []
-  ) : coins.data
+  const { baseCurrencyValue, exchanges } = await getCurrencyData(baseCurrency)
+
+  const filteredData = filterData(coins.data, filter)
+
+  const convertData = convertCurrency(filteredData, baseCurrencyValue)
+
+  const currencies = getCurrencyOptions(exchanges.exchange_rates);
 
   return (
     <div>
-      <OptionBar filter={filter} />
-      <DataTable data={filteredData} />
+      <OptionBar filter={filter} currencies={currencies} selectedCurrency={baseCurrency} />
+      <DataTable data={convertData} />
     </div>
   );
 };
