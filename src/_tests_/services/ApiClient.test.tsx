@@ -9,10 +9,8 @@ const mockAxiosInstance = {
   post: jest.fn(),
 };
 
-// Since the ApiClient class is using axios.create, we need to mock that
 axios.create.mockReturnValue(mockAxiosInstance);
 
-// Test suite for ApiClient
 describe('ApiClient', () => {
   const baseURL = 'http://example.com';
   let apiClient: ApiClient;
