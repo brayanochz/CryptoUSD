@@ -7,6 +7,9 @@ import { Coin } from '@/interfaces/coins';
 import { ExchangeCurrencyClient } from '@/services/ExchangeCurrencyClient';
 import { ExchangeRates } from '@/interfaces/exchangeRates';
 import { currencyMock } from '@/mock/currency';
+import useCryptoCurrency from '@/hooks/useCryptoCurrency';
+import useCurrencyExchange from '@/hooks/useCurrencyExchange';
+import useFilter from '@/hooks/useFilter';
 
 interface CoinListProps {
   page: string,
@@ -14,64 +17,27 @@ interface CoinListProps {
 }
 
 const CoinList: FC<CoinListProps> = async ({ page, filter }) => {
-  const cryptocurrencyClient = new CryptocurrencyClient()
-  //const exchangeClient = new ExchangeCurrencyClient()
 
+  const { getCoins } = useCryptoCurrency()
+  const { getCurrencyData, convertCurrency, getCurrencyOptions } = useCurrencyExchange()
+  const { filterData } = useFilter()
 
-  //const exchanges = await exchangeClient.getCurrencies()
-  const exchanges: ExchangeRates = currencyMock
-  const coins = await cryptocurrencyClient.getCoins(page)
-
-  const arrayFilter = Object.keys(filter).filter((filterName) => {
-    return filterName !== 'currency'
-  })
+  const coins = await getCoins(page)
 
   const baseCurrency = (filter['currency']) as string
 
-  const baseCurrencyValue = baseCurrency && baseCurrency !== '' && baseCurrency !== process.env.BASE_CURRENCY ?
-    (exchanges.exchange_rates.hasOwnProperty(baseCurrency) ?
-      exchanges.exchange_rates[baseCurrency] :
-      1) :
-    1
+  const { baseCurrencyValue, exchanges } = await getCurrencyData(baseCurrency)
 
-  const filteredData = arrayFilter.length > 0 ? arrayFilter.reduce<Coin[]>(
-    (previous, current) => {
-      const currentKey = current as keyof Coin
-      if (previous?.length <= 0) {
-        return coins.data.filter((coin: Coin) => {
-          return coin[currentKey]?.toString().toLowerCase().includes((filter[current] as string)?.toString().toLowerCase())
-        })
-      }
-      return previous.filter((coin: Coin) => {
-        if (current === undefined) return coin
-        return coin[currentKey]?.toString().toLowerCase().includes((filter[current] as string)?.toString().toLowerCase())
-      })
-    },
-    []
-  ) : coins.data
+  const filteredData = filterData(coins.data, filter)
 
-  const exchangeData = filteredData.map(
-    (coin: Coin) => ({
-      ...coin,
-      price: (parseFloat(coin.price_usd) * baseCurrencyValue).toString()
-    })
-  )
+  const convertData = convertCurrency(filteredData, baseCurrencyValue)
 
-  const currencies = [
-    {
-      label: process.env.BASE_CURRENCY as string,
-      value: process.env.BASE_CURRENCY as string
-    },
-    ...Object.keys(exchanges.exchange_rates).map(rate => ({
-      label: rate,
-      value: rate
-    }))
-  ]
+  const currencies = getCurrencyOptions(exchanges.exchange_rates);
 
   return (
     <div>
       <OptionBar filter={filter} currencies={currencies} selectedCurrency={baseCurrency} />
-      <DataTable data={exchangeData} />
+      <DataTable data={convertData} />
     </div>
   );
 };
