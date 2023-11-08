@@ -22,7 +22,7 @@ const Pagination: FC<PaginationProps> = ({ totalRecords, recordsPerPage, actualP
   }
 
   return (
-    <div id={actualPage.toString()}>
+    <div className='w-full flex flex-row my-2 justify-center' id={actualPage.toString()}>
       <NextPagination isCompact total={pageCount} initialPage={actualPage} onChange={onSelect} />
     </div>
   );
