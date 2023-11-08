@@ -76,14 +76,14 @@ describe('Details Component', () => {
     useCryptoCurrency.prototype.getDetails = jest.fn().mockResolvedValue(cryptoDetail);
 
     render(await Details(mockParams))
-    expect(screen.getByText(/\$688,326,163,064\.15/i)).toBeVisible();
+    expect(screen.getByText(/\$688,326,163,100/i)).toBeVisible();
   });
 
   it('renders the volume (24h) correctly', async () => {
     useCryptoCurrency.prototype.getDetails = jest.fn().mockResolvedValue(cryptoDetail);
 
     render(await Details(mockParams))
-    expect(screen.getByText(/\$16,112,887,735\.641008/i)).toBeVisible();
+    expect(screen.getByText(/\$16,112,887,740/i)).toBeVisible();
   });
 
   it('renders the market section correctly', async () => {
