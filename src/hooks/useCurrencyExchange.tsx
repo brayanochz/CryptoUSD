@@ -2,6 +2,16 @@ import { Coin } from "@/interfaces/coins";
 import { ExchangeRates, Rates } from "@/interfaces/exchangeRates";
 import { currencyMock } from "@/mock/currency";
 
+/**
+ * The `useCurrencyExchange` hook provides access to functions related to currency exchange operations.
+ * It includes functions for obtaining currency data, converting currency, and retrieving currency options.
+ *
+ * @returns {{
+*   getCurrencyData: (baseCurrency: string) => Promise<{ baseCurrencyValue: number, exchanges: ExchangeRates }>,
+*   convertCurrency: (data: Coin[], currencyValue: number) => Coin[],
+*   getCurrencyOptions: (rates: Rates) => string[]
+* }} - An object containing methods for currency-related operations.
+*/
 const useCurrencyExchange = () => {
 
   //const exchangeClient = new ExchangeCurrencyClient()

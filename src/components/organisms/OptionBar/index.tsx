@@ -11,6 +11,12 @@ interface OptionBarProps {
   page?: string
 }
 
+/**
+ * The OptionBar component displays a set of filter and search options for data manipulation.
+ *
+ * @param {OptionBarProps} props - The props for the OptionBar component.
+ * @returns {JSX.Element} - A React JSX element representing the OptionBar component.
+ */
 const OptionBar: FC<OptionBarProps> = ({ filter, currencies, selectedCurrency, page = 1 }) => {
   return (
     <section className='my-2 p-2'>
