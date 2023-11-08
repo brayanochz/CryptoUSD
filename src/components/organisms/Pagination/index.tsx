@@ -2,6 +2,7 @@
 import { useCustomRouter } from '@/hooks/useCustomRouter';
 import React, { FC } from 'react';
 import ReactPaginate from 'react-paginate';
+import { Pagination as NextPagination } from "@nextui-org/react";
 
 interface PaginationProps {
   totalRecords: number,
@@ -15,8 +16,6 @@ const Pagination: FC<PaginationProps> = ({ totalRecords, recordsPerPage, actualP
 
   const pageCount = Math.ceil(totalRecords / recordsPerPage)
 
-  console.log(pageCount)
-
   const onSelect = (page: { selected: number; }) => {
     const pageSelected = page.selected + 1;
     if (pageSelected >= 1) {
@@ -26,8 +25,6 @@ const Pagination: FC<PaginationProps> = ({ totalRecords, recordsPerPage, actualP
 
   return (
     <div id={actualPage.toString()}>
-      <span>{pageCount}</span>
-      <span>{actualPage}</span>
       <ReactPaginate
         breakLabel="..."
         pageCount={pageCount}
@@ -37,13 +34,14 @@ const Pagination: FC<PaginationProps> = ({ totalRecords, recordsPerPage, actualP
         onPageChange={onSelect}
         renderOnZeroPageCount={null}
         onClick={onSelect}
-        initialPage={actualPage - 1}
+        initialPage={actualPage > 1 ? actualPage - 1 : actualPage}
         containerClassName='flex flex-row w-full justify-center items-center'
         pageClassName='my-1 rounded-lg bg-gray-500 color-white px-2'
         previousClassName='mx-2'
         nextClassName='mx-2'
         activeClassName='bg-gray-700'
       />
+      <NextPagination total={pageCount} initialPage={actualPage - 1} />
     </div>
   );
 };
