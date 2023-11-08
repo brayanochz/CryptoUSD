@@ -1,6 +1,7 @@
 import { Coin } from '@/interfaces/coins';
 import { ITableData, ITableHeader, ITableHeaderColumn } from '@/interfaces/table';
 import { PriceFormatter } from '@/utils/prices';
+import Link from 'next/link';
 import React, { FC } from 'react';
 
 const TableContent: FC<ITableData> = ({ data, headers }) => {
@@ -19,7 +20,7 @@ const TableContent: FC<ITableData> = ({ data, headers }) => {
                     priceFormatter.format(
                       parseFloat(coin[header.key as keyof Coin] as string)
                     ) :
-                    coin[header.key as keyof Coin]
+                    header.key === "name" ? <Link href={`/details/${coin.id}`} target='_blank'>{coin[header.key as keyof Coin]}</Link> : coin[header.key as keyof Coin]
                 }
               </td>
             ))}
