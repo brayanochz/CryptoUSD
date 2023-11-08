@@ -25,7 +25,9 @@ const Pagination: FC<PaginationProps> = ({ totalRecords, recordsPerPage, actualP
   }
 
   return (
-    <div>
+    <div id={actualPage.toString()}>
+      <span>{pageCount}</span>
+      <span>{actualPage}</span>
       <ReactPaginate
         breakLabel="..."
         pageCount={pageCount}
