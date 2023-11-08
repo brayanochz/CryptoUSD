@@ -1,45 +1,62 @@
+import useCryptoCurrency from "@/hooks/useCryptoCurrency"
+import { PriceFormatter } from "@/utils/prices"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: 'Detalles',
+  title: 'Details',
   description: 'CryptoUSD',
 }
 
-export default function Home() {
+interface DetailsProps {
+  params: { id: string },
+}
+
+export default async function Details({
+  params: {
+    id
+  }
+}: DetailsProps) {
+
+  const { getCoinDetails } = useCryptoCurrency()
+
+  const details = await getCoinDetails(id)
+
+  const coinDetail = details[0]
 
   return (
     <>
       <header className="text-center p-6 text-white">
         <h1 className="text-3xl font-bold">Details of Bitcoin (BTC)</h1>
+        <h3>{coinDetail.id}</h3>
       </header>
 
       <main className="p-4">
         <section className="max-w-4xl mx-auto bg-gray-800 shadow-md rounded p-6 my-6">
-          <h2 className="text-2xl font-bold text-white mb-4">Bitcoin (BTC)</h2>
+          <h2 className="text-2xl font-bold text-white mb-4">{coinDetail.name} ({coinDetail.symbol})</h2>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <h3 className="font-semibold">Precio USD:</h3>
-              <p className="text-2xl font-bold">$6456.52</p>
+              <h3 className="font-semibold">Price USD:</h3>
+              <p className="text-2xl font-bold">{PriceFormatter().format(parseFloat(coinDetail.price_usd))}</p>
             </div>
             <div>
-              <h3 className="font-semibold">Cambio 24h:</h3>
-              <p className="text-red-600">-1.47%</p>
+              <h3 className="font-semibold">24h Change:</h3>
+              <p className="text-red-600">{coinDetail.percent_change_1h}%</p>
             </div>
             <div>
-              <h3 className="font-semibold">Cambio 1h:</h3>
-              <p className="text-green-600">0.05%</p>
+              <h3 className="font-semibold">1h Change:</h3>
+              <p className="text-green-600">{coinDetail.percent_change_24h}%</p>
             </div>
             <div>
-              <h3 className="font-semibold">Cambio 7d:</h3>
-              <p>-1.07%</p>
+              <h3 className="font-semibold">7d Change:</h3>
+              <p>{coinDetail.percent_change_7d}%</p>
             </div>
             <div>
-              <h3 className="font-semibold">Cap. de Mercado:</h3>
-              <p>$111,586,042,785.56</p>
+              <h3 className="font-semibold">Market Cap:</h3>
+              <p>{PriceFormatter().format(parseFloat(coinDetail.market_cap_usd))}</p>
             </div>
             <div>
-              <h3 className="font-semibold">Volumen (24h):</h3>
-              <p>$3,997,655,362.96</p>
+              <h3 className="font-semibold">Volume (24h):</h3>
+              <p>{PriceFormatter().format(coinDetail.volume24)}</p>
             </div>
           </div>
         </section>
@@ -89,8 +106,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-
       </main>
     </>
   )

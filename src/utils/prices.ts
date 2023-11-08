@@ -3,5 +3,7 @@ export const PriceFormatter = (locale = 'en-US') => {
     style: 'currency',
     currency: 'USD',
     maximumSignificantDigits: 10,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 6
   });
 }

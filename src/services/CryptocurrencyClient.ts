@@ -1,6 +1,7 @@
 import { IApiClient } from "@/interfaces/apiClient";
 import { ApiClient } from "./ApiClient";
 import { CoinsResponse } from "@/interfaces/table";
+import { Coin } from "@/interfaces/coins";
 
 export const revalidate = 3600
 export class CryptocurrencyClient {
@@ -23,6 +24,15 @@ export class CryptocurrencyClient {
     const url = `${process.env.CRYPTOCURRENCY_COIN_ENDPOINT}?${params}`
     if (!url) throw new Error("Not COIN ENDPOINT");
     return this.apiClient.get<CoinsResponse>(url)
+  }
+
+  async getCoinDetails(coinId: string): Promise<Coin[]> {
+    const params = new URLSearchParams({
+      id: coinId
+    })
+    const url = `${process.env.CRYPTOCURRENCY_COIN_DETAILS_ENDPOINT}?${params}`
+    if (!url) throw new Error("Not COIN DETAILS ENDPOINT");
+    return this.apiClient.get<Coin[]>(url)
   }
 
 }

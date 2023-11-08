@@ -9,8 +9,14 @@ const useCryptoCurrency = () => {
     return coins
   }
 
+  const getCoinDetails = async (coinId: string) => {
+    const detail = await cryptocurrencyClient.getCoinDetails(coinId)
+    return detail
+  }
+
   return {
-    getCoins
+    getCoins,
+    getCoinDetails
   }
 };
 
