@@ -56,7 +56,7 @@ export const cryptoMock = [
 ];
 
 
-export const cryptoCurrency = {
+export const cryptoCurrencyMock = {
   "data": cryptoMock,
   "info": {
     "coins_num": 1969,
@@ -64,7 +64,7 @@ export const cryptoCurrency = {
   }
 }
 
-export const cryptoDetail = [
+export const cryptoDetailMock = [
   {
     "id": "90",
     "symbol": "BTC",
@@ -82,5 +82,19 @@ export const cryptoDetail = [
     "csupply": "19470946.00",
     "tsupply": "19470946",
     "msupply": "21000000"
+  }
+]
+
+
+export const marketsMock = [
+  {
+    "name": "BingX",
+    "base": "BTC",
+    "quote": "USDT",
+    "price": 35232,
+    "price_usd": 35232,
+    "volume": 63328.5403,
+    "volume_usd": 2231191131.8496,
+    "time": 1699396567
   }
 ]

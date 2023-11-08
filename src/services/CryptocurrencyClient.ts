@@ -2,6 +2,7 @@ import { IApiClient } from "@/interfaces/apiClient";
 import { ApiClient } from "./ApiClient";
 import { CoinsResponse } from "@/interfaces/table";
 import { Coin } from "@/interfaces/coins";
+import { Market } from "@/interfaces/market";
 
 export const revalidate = 3600
 export class CryptocurrencyClient {
@@ -33,6 +34,15 @@ export class CryptocurrencyClient {
     const url = `${process.env.CRYPTOCURRENCY_COIN_DETAILS_ENDPOINT}?${params}`
     if (!url) throw new Error("Not COIN DETAILS ENDPOINT");
     return this.apiClient.get<Coin[]>(url)
+  }
+
+  async getMarkets(coinId: string): Promise<Market[]> {
+    const params = new URLSearchParams({
+      id: coinId
+    })
+    const url = `${process.env.CRYPTOCURRENCY_MARKETS}?${params}`
+    if (!url) throw new Error("Not COIN MARKETS ENDPOINT");
+    return this.apiClient.get<Market[]>(url)
   }
 
 }

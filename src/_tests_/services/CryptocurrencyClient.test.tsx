@@ -1,5 +1,5 @@
 import { CoinsResponse } from "@/interfaces/table";
-import { cryptoCurrency, cryptoDetail } from '@/mock/crypto';
+import { cryptoCurrencyMock, cryptoDetailMock } from '@/mock/crypto';
 import { CryptocurrencyClient } from '@/services/CryptocurrencyClient';
 import { ApiClient } from '@/services/ApiClient';
 import "@testing-library/jest-dom";
@@ -24,7 +24,7 @@ describe('CryptocurrencyClient', () => {
   // Test the getCoins method
   it('should fetch coins data using the ApiClient', async () => {
 
-    const mockData: CoinsResponse = cryptoCurrency;
+    const mockData: CoinsResponse = cryptoCurrencyMock;
     const page = '1';
     const expectedUrl = `${process.env.CRYPTOCURRENCY_COIN_ENDPOINT}?start=0&limit=100`;
 
@@ -42,7 +42,7 @@ describe('CryptocurrencyClient', () => {
   // Test the getDetails method
   it('should fetch coin details data using the ApiClient', async () => {
 
-    const mockData: Coin[] = cryptoDetail;
+    const mockData: Coin[] = cryptoDetailMock;
     const id = '50';
     const expectedUrl = `${process.env.CRYPTOCURRENCY_COIN_DETAILS_ENDPOINT}?id=${id}`;
 
