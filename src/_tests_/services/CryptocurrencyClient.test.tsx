@@ -1,9 +1,10 @@
 import { CoinsResponse } from "@/interfaces/table";
-import { cryptoCurrencyMock, cryptoDetailMock } from '@/mock/crypto';
+import { cryptoCurrencyMock, cryptoDetailMock, marketsMock } from '@/mock/crypto';
 import { CryptocurrencyClient } from '@/services/CryptocurrencyClient';
 import { ApiClient } from '@/services/ApiClient';
 import "@testing-library/jest-dom";
 import { Coin } from "@/interfaces/coins";
+import { Market } from "@/interfaces/market";
 
 // Mock the ApiClient module
 jest.mock('@/services/ApiClient');
@@ -51,6 +52,24 @@ describe('CryptocurrencyClient', () => {
 
     // Call the getCoinDetails method
     const data = await cryptoClient.getCoinDetails(id);
+
+    // Assertions
+    expect(ApiClient.prototype.get).toHaveBeenCalledWith(expectedUrl);
+    expect(data).toEqual(mockData);
+  });
+
+  // Test the getMarkets method
+  it('should fetch markets details data using the ApiClient', async () => {
+
+    const mockData: Market[] = marketsMock;
+    const id = '50';
+    const expectedUrl = `${process.env.CRYPTOCURRENCY_MARKETS}?id=${id}`;
+
+    // Mock the ApiClient instance method get
+    ApiClient.prototype.get.mockResolvedValue(mockData);
+
+    // Call the getCoinDetails method
+    const data = await cryptoClient.getMarkets(id);
 
     // Assertions
     expect(ApiClient.prototype.get).toHaveBeenCalledWith(expectedUrl);
