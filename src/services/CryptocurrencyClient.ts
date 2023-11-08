@@ -47,7 +47,6 @@ export class CryptocurrencyClient {
       url = `${url}?${params}`
     }
     if (!url) throw new Error("Not COIN ENDPOINT");
-    console.log(url)
     return this.apiClient.get<CoinsResponse>(url)
   }
 

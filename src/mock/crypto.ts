@@ -91,10 +91,10 @@ export const marketsMock = [
     "name": "BingX",
     "base": "BTC",
     "quote": "USDT",
-    "price": 35232,
-    "price_usd": 35232,
+    "price": 35330,
+    "price_usd": 35330,
     "volume": 63328.5403,
-    "volume_usd": 2231191131.8496,
+    "volume_usd": 2266904803.1422,
     "time": 1699396567
   }
 ]

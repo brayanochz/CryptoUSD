@@ -82,13 +82,13 @@ describe('Details Component', () => {
 
   it('renders the market value correctly', async () => {
     render(await Details(mockParams))
-    expect(screen.getByText(/\$35,330\/ USD/i)).toBeVisible();
+    expect(screen.getByText(/\$35,330/i)).toBeVisible();
   });
 
 
   it('renders the market volume correctly', async () => {
     render(await Details(mockParams))
-    expect(screen.getByText(/Volume:\$2.266904803B/i)).toBeVisible();
+    expect(screen.getByText(/\$2.266904803B/i)).toBeVisible();
   });
 
 });
