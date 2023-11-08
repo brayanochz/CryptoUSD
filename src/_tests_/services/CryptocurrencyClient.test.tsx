@@ -23,11 +23,29 @@ describe('CryptocurrencyClient', () => {
 
 
   // Test the getCoins method
-  it('should fetch coins data using the ApiClient', async () => {
+  it('should fetch coins page 1 data using the ApiClient', async () => {
 
     const mockData: CoinsResponse = cryptoCurrencyMock;
     const page = '1';
-    const expectedUrl = `${process.env.CRYPTOCURRENCY_COIN_ENDPOINT}?start=0&limit=100`;
+    const expectedUrl = `${process.env.CRYPTOCURRENCY_COIN_ENDPOINT}`;
+
+    // Mock the ApiClient instance method get
+    ApiClient.prototype.get.mockResolvedValue(mockData);
+
+    // Call the getCoins method
+    const data = await cryptoClient.getCoins(page);
+
+    // Assertions
+    expect(ApiClient.prototype.get).toHaveBeenCalledWith(expectedUrl);
+    expect(data).toEqual(mockData);
+  });
+
+  // Test the getCoins method
+  it('should fetch coins page 2 data using the ApiClient', async () => {
+
+    const mockData: CoinsResponse = cryptoCurrencyMock;
+    const page = '2';
+    const expectedUrl = `${process.env.CRYPTOCURRENCY_COIN_ENDPOINT}?start=100&limit=100`;
 
     // Mock the ApiClient instance method get
     ApiClient.prototype.get.mockResolvedValue(mockData);
