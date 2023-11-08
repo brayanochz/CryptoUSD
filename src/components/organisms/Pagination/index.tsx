@@ -15,6 +15,8 @@ const Pagination: FC<PaginationProps> = ({ totalRecords, recordsPerPage, actualP
 
   const pageCount = Math.ceil(totalRecords / recordsPerPage)
 
+  console.log(pageCount)
+
   const onSelect = (page: { selected: number; }) => {
     const pageSelected = page.selected + 1;
     if (pageSelected >= 1) {

@@ -9,7 +9,7 @@ interface SelectProps extends React.AllHTMLAttributes<HTMLSelectElement> {
 
 const Select: FC<SelectProps> = ({ options, defaultValue, ...props }) => {
   return (
-    <select defaultValue={defaultValue} className='px-1 my-1 rounded-lg bg-transparent color-white border border-neutral-600' {...props} id={props.id || props.name}>
+    <select defaultValue={defaultValue} className='w-250px sm:w-150px px-1 my-1 rounded-lg bg-transparent color-white border border-neutral-600' {...props} id={props.id || props.name}>
       {options?.map(item => (<option className='bg-gray-600 text-white' key={uuid()} value={item.value}>{item.label}</option>))}
     </select>
   );
