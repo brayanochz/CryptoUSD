@@ -2,14 +2,10 @@ import React, { FC } from 'react';
 import OptionBar from '../../organisms/OptionBar';
 import DataTable from '../../organisms/DataTable';
 import { FilterType } from '@/types';
-import { CryptocurrencyClient } from '@/services/CryptocurrencyClient';
-import { Coin } from '@/interfaces/coins';
-import { ExchangeCurrencyClient } from '@/services/ExchangeCurrencyClient';
-import { ExchangeRates } from '@/interfaces/exchangeRates';
-import { currencyMock } from '@/mock/currency';
 import useCryptoCurrency from '@/hooks/useCryptoCurrency';
 import useCurrencyExchange from '@/hooks/useCurrencyExchange';
 import useFilter from '@/hooks/useFilter';
+import Pagination from '@/components/organisms/Pagination';
 
 interface CoinListProps {
   page: string,
@@ -36,8 +32,9 @@ const CoinList: FC<CoinListProps> = async ({ page, filter }) => {
 
   return (
     <div>
-      <OptionBar filter={filter} currencies={currencies} selectedCurrency={baseCurrency} />
+      <OptionBar filter={filter} currencies={currencies} selectedCurrency={baseCurrency} page={page} />
       <DataTable data={convertData} />
+      <Pagination totalRecords={coins.info.coins_num} recordsPerPage={100} actualPage={parseInt(page, 10)} />
     </div>
   );
 };

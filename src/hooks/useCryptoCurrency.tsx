@@ -5,12 +5,21 @@ const useCryptoCurrency = () => {
   const cryptocurrencyClient = new CryptocurrencyClient()
 
   const getCoins = async (page: string) => {
-    const coins = await cryptocurrencyClient.getCoins(page)
-    return coins
+    return await cryptocurrencyClient.getCoins(page)
+  }
+
+  const getCoinDetails = async (coinId: string) => {
+    return await cryptocurrencyClient.getCoinDetails(coinId)
+  }
+
+  const getMarkets = async (coinId: string) => {
+    return await cryptocurrencyClient.getMarkets(coinId)
   }
 
   return {
-    getCoins
+    getCoins,
+    getCoinDetails,
+    getMarkets
   }
 };
 

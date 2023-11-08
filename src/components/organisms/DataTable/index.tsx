@@ -1,7 +1,5 @@
 import React, { FC } from 'react';
 import Table from '../../molecules/Table';
-import { CryptocurrencyClient } from '@/services/CryptocurrencyClient';
-import { FilterType } from '@/types';
 import { Coin } from '@/interfaces/coins';
 
 const columns = {
