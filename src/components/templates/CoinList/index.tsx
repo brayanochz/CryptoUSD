@@ -12,6 +12,12 @@ interface CoinListProps {
   filter: FilterType
 }
 
+/**
+ * The CoinList component displays a list of cryptocurrency coins with filtering and pagination options.
+ *
+ * @param {CoinListProps} props - The props for the CoinList component.
+ * @returns {JSX.Element} - A React JSX element representing the CoinList component.
+ */
 const CoinList: FC<CoinListProps> = async ({ page, filter }) => {
 
   const { getCoins } = useCryptoCurrency()
@@ -20,6 +26,7 @@ const CoinList: FC<CoinListProps> = async ({ page, filter }) => {
 
   const coins = await getCoins(page)
 
+  // Extract the base currency from the filter criteria
   const baseCurrency = (filter['currency']) as string
 
   const { baseCurrencyValue, exchanges } = await getCurrencyData(baseCurrency)

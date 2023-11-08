@@ -9,6 +9,12 @@ interface PaginationProps {
   actualPage?: number
 }
 
+/**
+ * The Pagination component displays a pagination control for navigating between pages of data.
+ *
+ * @param {PaginationProps} props - The props for the Pagination component.
+ * @returns {JSX.Element} - A React JSX element representing the Pagination component.
+ */
 const Pagination: FC<PaginationProps> = ({ totalRecords, recordsPerPage, actualPage = 0 }) => {
 
   const router = useCustomRouter()
