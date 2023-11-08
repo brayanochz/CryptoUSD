@@ -17,13 +17,17 @@ export class CryptocurrencyClient {
 
   async getCoins(pageRAW: string): Promise<CoinsResponse> {
     const page = parseInt(pageRAW)
-    const interval = {
-      start: `${(page - 1) * 100}`,
-      limit: '100'
+    let url = `${process.env.CRYPTOCURRENCY_COIN_ENDPOINT}`
+    if (page > 1) {
+      const interval = {
+        start: `${(page - 1) * 100}`,
+        limit: '100'
+      }
+      const params = new URLSearchParams(interval)
+      url = `${url}?${params}`
     }
-    const params = new URLSearchParams(interval)
-    const url = `${process.env.CRYPTOCURRENCY_COIN_ENDPOINT}?${params}`
     if (!url) throw new Error("Not COIN ENDPOINT");
+    console.log(url)
     return this.apiClient.get<CoinsResponse>(url)
   }
 
