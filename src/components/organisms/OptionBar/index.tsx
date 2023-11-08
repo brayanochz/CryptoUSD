@@ -14,7 +14,7 @@ interface OptionBarProps {
 const OptionBar: FC<OptionBarProps> = ({ filter, currencies, selectedCurrency, page = 1 }) => {
   return (
     <section className='my-2 p-2'>
-      <form className='flex justify-end items-end' action={`/home/${page}`} method='GET'>
+      <form className='flex flex-col sm:flex-row justify-end sm:items-end items-start space-y-2 sm:space-y-0 sm:space-x-2' action={`/home/${page}`} method='GET'>
 
         <SelectField defaultValue={selectedCurrency} name='currency' label={'Select currency'} options={currencies} />
 

@@ -11,7 +11,9 @@ export default async function Home({
 }: HomeProps) {
   return (
     <main className="w-full h-screen p-6">
-      <h2>Crypto List page {page} </h2>
+      <header className="text-center p-6 text-white">
+        <h1 className="text-3xl font-bold">CryptoUSD</h1>
+      </header>
       <CoinList page={page} filter={searchParams} />
     </main>
   )
