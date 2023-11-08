@@ -1,6 +1,8 @@
 import useCryptoCurrency from "@/hooks/useCryptoCurrency"
-import { PriceFormatter } from "@/utils/prices"
+import { Market } from "@/interfaces/market"
+import { PriceFormatter, PriceFormatterCompact } from "@/utils/prices"
 import { Metadata } from "next"
+import { v4 as uuid } from "uuid"
 
 export const metadata: Metadata = {
   title: 'Details',
@@ -17,17 +19,23 @@ export default async function Details({
   }
 }: DetailsProps) {
 
-  const { getCoinDetails } = useCryptoCurrency()
+  const { getCoinDetails, getMarkets } = useCryptoCurrency()
 
-  const details = await getCoinDetails(id)
+  const detailPromise = getCoinDetails(id)
+  const marketPromise = getMarkets(id)
 
-  const coinDetail = details[0]
+  const results = await Promise.all([
+    detailPromise,
+    marketPromise
+  ])
+
+  const coinDetail = results[0][0]
+  const markets = results[1]
 
   return (
     <>
       <header className="text-center p-6 text-white">
         <h1 className="text-3xl font-bold">Details of Bitcoin (BTC)</h1>
-        <h3>{coinDetail.id}</h3>
       </header>
 
       <main className="p-4">
@@ -64,46 +72,30 @@ export default async function Details({
         <section className="max-w-4xl mx-auto p-6 my-6">
           <h2 className="text-2xl font-bold text-white mb-4">Markets</h2>
           <div className="flex flex-wrap -mx-2">
-            <div className="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 px-2 mb-4">
-              <div className="bg-gray-800 rounded shadow p-4 flex flex-col items-center">
-                <h3 className="text-lg font-semibold">BitForex</h3>
-                <p className="text-sm text-gray-400">BTC/USDT</p>
-                <div className="my-2">
-                  <span className="text-xl font-bold">$3,989.64</span>
-                  <span className="text-sm text-gray-400">/ USD</span>
-                </div>
-                <div className="text-center py-2">
-                  <div className="text-green-400">
-                    <span className="font-bold">Volume:</span>
-                    <span>$300M+</span>
-                  </div>
-                  <div className="text-gray-400 mt-1">
-                    <span className="font-bold">Last Updated:</span>
-                    <span>Just now</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 px-2 mb-4">
-              <div className="bg-gray-800 rounded shadow p-4 flex flex-col items-center">
-                <h3 className="text-lg font-semibold">bw</h3>
-                <p className="text-sm text-gray-400">BTC/USDT</p>
-                <div className="my-2">
-                  <span className="text-xl font-bold">$3,991.30</span>
-                  <span className="text-sm text-gray-400">/ USD</span>
-                </div>
-                <div className="text-center py-2">
-                  <div className="text-green-400">
-                    <span className="font-bold">Volume:</span>
-                    <span>$235M+</span>
-                  </div>
-                  <div className="text-gray-400 mt-1">
-                    <span className="font-bold">Last Updated:</span>
-                    <span>Just now</span>
+            {
+              markets.map((market: Market) => (
+                <div key={uuid()} className="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 px-2 mb-4">
+                  <div className="bg-gray-800 rounded shadow p-4 flex flex-col items-center">
+                    <h3 className="text-lg font-semibold">{market.name}</h3>
+                    <p className="text-sm text-gray-400">{market.base}/{market.quote}</p>
+                    <div className="my-2">
+                      <span className="text-xl font-bold">{PriceFormatter().format(market.price)}</span>
+                      <span className="text-sm text-gray-400">/ USD</span>
+                    </div>
+                    <div className="text-center py-2">
+                      <div className="text-green-400">
+                        <span className="font-bold">Volume:</span>
+                        <span>{PriceFormatterCompact().format(market.volume_usd)}</span>
+                      </div>
+                      <div className="text-gray-400 mt-1">
+                        <span className="font-bold">Last Updated:</span>
+                        <span>Just now</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              ))
+            }
           </div>
         </section>
       </main>
