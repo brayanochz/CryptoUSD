@@ -19,6 +19,10 @@ module.exports = {
         '70vh': '70vh',
         '80vh': '80vh',
         '90vh': '90vh'
+      },
+      width: {
+        '150px': '150px',
+        '250px': '250px'
       }
     },
   },
