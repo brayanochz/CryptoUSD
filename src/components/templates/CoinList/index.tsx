@@ -31,11 +31,11 @@ const CoinList: FC<CoinListProps> = async ({ page, filter }) => {
   const currencies = getCurrencyOptions(exchanges.exchange_rates);
 
   return (
-    <div>
+    <>
       <OptionBar filter={filter} currencies={currencies} selectedCurrency={baseCurrency} page={page} />
       <DataTable data={convertData} />
       <Pagination totalRecords={coins.info.coins_num} recordsPerPage={100} actualPage={parseInt(page, 10)} />
-    </div>
+    </>
   );
 };
 

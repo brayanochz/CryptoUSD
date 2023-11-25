@@ -57,8 +57,8 @@ export default async function Details({
             <div>
               <h3 className="font-semibold">1h Change:</h3>
               <p className={clsx({
-                'text-red-600': parseFloat(coinDetail.percent_change_1h) < 0,
-                'text-green-600': parseFloat(coinDetail.percent_change_1h) > 0
+                'text-red-600': parseFloat(coinDetail.percent_change_24h) < 0,
+                'text-green-600': parseFloat(coinDetail.percent_change_24h) > 0
               })}>{coinDetail.percent_change_24h}%</p>
             </div>
             <div>
