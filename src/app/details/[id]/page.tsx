@@ -3,6 +3,7 @@ import { Market } from "@/interfaces/market"
 import { PriceFormatter, PriceFormatterCompact } from "@/utils/prices"
 import { Metadata } from "next"
 import { v4 as uuid } from "uuid"
+import clsx from "clsx"
 
 export const metadata: Metadata = {
   title: 'Details',
@@ -48,11 +49,17 @@ export default async function Details({
             </div>
             <div>
               <h3 className="font-semibold">24h Change:</h3>
-              <p className="text-red-600">{coinDetail.percent_change_1h}%</p>
+              <p className={clsx({
+                'text-red-600': parseFloat(coinDetail.percent_change_1h) < 0,
+                'text-green-600': parseFloat(coinDetail.percent_change_1h) > 0
+              })}>{coinDetail.percent_change_1h}%</p>
             </div>
             <div>
               <h3 className="font-semibold">1h Change:</h3>
-              <p className="text-green-600">{coinDetail.percent_change_24h}%</p>
+              <p className={clsx({
+                'text-red-600': parseFloat(coinDetail.percent_change_1h) < 0,
+                'text-green-600': parseFloat(coinDetail.percent_change_1h) > 0
+              })}>{coinDetail.percent_change_24h}%</p>
             </div>
             <div>
               <h3 className="font-semibold">7d Change:</h3>
