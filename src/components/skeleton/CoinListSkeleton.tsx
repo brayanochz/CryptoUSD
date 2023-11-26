@@ -5,7 +5,7 @@ const CoinListSkeleton = (props: any) => (
   <ContentLoader
     speed={2}
     width={'100%'}
-    height={'80vh'}
+    height={'90vh'}
     backgroundColor="#ecebeb"
     foregroundColor="#ecebeb"
     {...props}
@@ -26,8 +26,9 @@ const CoinListSkeleton = (props: any) => (
     <rect x="5" y="520" rx="3" ry="3" width="100%" height="40" />
     <rect x="5" y="580" rx="3" ry="3" width="100%" height="40" />
     <rect x="5" y="640" rx="3" ry="3" width="100%" height="40" />
-    <rect x="5" y="700" rx="3" ry="3" width="100%" height="40" />
-    <rect x="5" y="760" rx="3" ry="3" width="100%" height="40" />
+
+    <rect x="calc(50% - 156px)" y="700" rx="3" ry="3" width="252" height="36" />
+
   </ContentLoader>
 )
 
